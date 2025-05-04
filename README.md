@@ -7,7 +7,7 @@ This project detects screams in real-time audio using a machine learning model. 
 
 - `scream_detector.py` – Main script for running the model.
 - `scaler.pkl` – StandardScaler object for feature scaling.
-- `model.pkl` – Trained scream detection model (e.g., XGBoost, LightGBM).
+- `scream_detector_model.pkl` – Trained scream detection model (e.g., XGBoost, LightGBM).
 - `requirements.txt` – Python dependencies.
 
 ## Installation (on Raspberry Pi)
