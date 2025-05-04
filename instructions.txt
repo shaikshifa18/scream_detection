@@ -1,0 +1,66 @@
+1. Sample Code to Load and Use Your Model with Microphone
+
+Here’s a simple scream_detector.py you can use or modify:
+
+import sounddevice as sd
+import numpy as np
+import joblib  
+import librosa
+
+# Load model and scaler
+model= joblib.load('scream_detector_model.pkl')
+scaler = joblib.load('scaler.pkl')
+
+# Settings
+duration = 2  # seconds
+sr = 22050  # sampling rate
+
+print("Listening... Press Ctrl+C to stop.")
+
+try:
+    while True:
+        recording = sd.rec(int(duration * sr), samplerate=sr, channels=1)
+        sd.wait()  # Wait until recording is finished
+
+        # Convert to 1D array
+        audio = recording.flatten()
+
+        # Extract features (e.g., MFCCs)
+        mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)
+        mfcc_mean = np.mean(mfcc.T, axis=0).reshape(1, -1)
+
+        # Scale features
+        mfcc_scaled = scaler.transform(mfcc_mean)
+
+        # Predict
+        prediction = model.predict(mfcc_scaled)
+        print("Prediction:", prediction[0])
+
+        if prediction[0] == 'scream':  # or your scream class label
+            print("Scream detected!")
+
+except KeyboardInterrupt:
+    print("Stopped.")
+
+---
+
+2. Folder Structure on Pi
+
+Keep your files like this:
+
+scream_detection/
+├── Converted_Separately/
+│   ├── scream_detector_model.pkl
+│   ├── scaler.pkl
+│   ├── scream_detector.py
+
+---
+
+3. Test it
+
+Once files are in place:
+
+cd scream_detection/Converted_Separately
+python scream_detector.py
+
+Make a scream-like sound and check if it detects it.
