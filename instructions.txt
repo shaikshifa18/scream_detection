@@ -1,24 +1,34 @@
-1. Use The Model with Microphone
+Raspberry Pi Deployment Guide for Scream Detection
+1. Clone the Repository:
+On the Raspberry Pi terminal:
 
----
-
-2. Folder Structure on Pi
-
-Keep your files like this:
-
-scream_detection/
-├── Converted_Separately/
-│   ├── scream_detector_model.pkl
-│   ├── scaler.pkl
-│   ├── scream_detector.py
-
----
-
-3. Test it
-
-Once files are in place:
-
+git clone https://github.com/shaikshifa18/scream_detection.git
 cd scream_detection/Converted_Separately
-python scream_detector.py
 
-Make a scream-like sound and check if it detects it.
+
+
+2. Install Python and Required Packages:
+
+Make sure Python 3 and pip are installed:
+sudo apt update
+sudo apt install python3-pip
+
+Then install required libraries:
+pip3 install -r requirements.txt
+
+
+
+3. Connect USB Microphone:
+
+Plug in a USB microphone. Check it is detected:
+erecord -1
+
+
+
+
+
+4. Run the Detector Script:
+
+Inside the project directory, run:
+python3 scream_detection.py
+
