@@ -1,0 +1,12 @@
+### `requirements.txt`
+
+numpy
+pandas
+librosa
+scikit-learn
+xgboost
+lightgbm
+catboost
+imblearn
+joblib
+sounddevice
