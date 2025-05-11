@@ -1,12 +1,9 @@
 ### `requirements.txt`
 
-numpy
-pandas
 librosa
+numpy
 scikit-learn
-xgboost
-lightgbm
-catboost
-imblearn
-joblib
 sounddevice
+joblib
+imblearn
+pandas
